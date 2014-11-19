@@ -1,0 +1,17 @@
+{
+  "name": "lab4",
+  "main": "server.js",
+  "version": "0.0.0",
+  "authors": [
+    "Ivan Gromov <summer.is.gone@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
