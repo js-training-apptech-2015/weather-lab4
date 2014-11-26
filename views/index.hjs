@@ -14,6 +14,7 @@
     <script src="/components/jquery/dist/jquery.js"></script>
     <script src="/components/underscore/underscore.js"></script>
     <script src="/components/backbone/backbone.js"></script>
+    <script src="/components/marionette/lib/backbone.marionette.js"></script>
     <script src="/components/hogan/lib/template.js"></script>
     <script src="/components/hogan/lib/compiler.js"></script>
 

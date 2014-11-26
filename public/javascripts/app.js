@@ -1,51 +1,47 @@
-(function ($, Backbone) {
+(function ($, Backbone, Marionette, Hogan) {
     "use strict";
-    var IndexView = Backbone.View.extend({
-        template: "<h1>Searching {{search}}...</h1> <form><input name='search' /></form>",
-        render: function () {
-            var output = this._template.render(this.model.toJSON());
-            this.$el.html(output);
-            return this;
-        },
-        initialize: function () {
-            this._template = Hogan.compile(this.template);
-            this.render();
-            this.model.on('change', this.render, this);
-        },
-        events: {
-            "submit form": "onSearch"
-        },
-        onSearch: function (e) {
-            var query = this.$("input").val();
-            this.model.set({
-                search: query
-            });
-            return false;
-        }
+    function renderer (templateContent, data) {
+        var template = Hogan.compile(templateContent);
+        return template.render(data);
+    }
+
+    var User = Backbone.Model.extend({
+        urlRoot: '/users'
     });
 
-    var App = Backbone.Router.extend({
-        initialize: function (options) {
-            this.container = options.container;
-        },
-        routes: {
-            '': "index"
-        },
-        index: function () {
-            var search = new Backbone.Model();
-            var indexView = new IndexView({
-                el: this.container,
-                model: search
-            });
-        }
+    var UserCollection = Backbone.Collection.extend({
+        url: '/users'
+    });
+
+    var UserView = Marionette.ItemView.extend({
+        tagName: 'li',
+        template: "{{name}} ({{score}})"
+    });
+
+    var LoadingView = Marionette.ItemView.extend({
+        template: "loading..."
+    });
+
+    var UserListView = Marionette.CollectionView.extend({
+        tagName: 'ul',
+        childView: UserView,
+        emptyView: LoadingView
     });
 
     $(function () {
-        var app = new App({
-            container: $('#container')
+        var app = new Marionette.Application();
+        app.addRegions({
+            main: '#container'
         });
-        Backbone.history.start({
-            pushState: false
+        app.addInitializer(function() {
+            var userCollection = new UserCollection();
+            userCollection.fetch();
+            var userListView = new UserListView({
+                collection: userCollection
+            });
+            app.main.show(userListView);
         });
+        Marionette.Renderer.render = renderer;
+        app.start();
     });
-})(jQuery, Backbone);
+})(jQuery, Backbone, Marionette, Hogan);
