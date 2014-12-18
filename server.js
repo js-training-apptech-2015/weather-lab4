@@ -19,12 +19,6 @@ app.set('view engine', 'hjs');
 
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-    res.render('index', {
-        title: 'Express'
-    });
-});
-
 app.get('/users', function (req, res) {
     res.send(data);
 });

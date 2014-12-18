@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+    <!-- client templates -->
+    <script type="text/template" id="locations">
+    <form action=".">
+      <div class="form-group">
+        <label class="control-label">Weather in:</label>
+        <select class="form-control" name="city" id="id_city">
+          <option value="">Select city</option>
+          {{#locations}}
+          <option value="{{name}}">{{name}}</option>
+          {{/locations}}
+        </select>
+      </div>
+    </form>
+    </script>
+    <script type="text/template" id="forecast-item">
+    <div class="col-xs-2">
+      <h3>{{weekday}}</h3>
+      <div>{{date}}</div>
+      <hr>
+      <div>{{sky}}</div>
+      <div><h3>{{dayTemp}}</h3> Day</div>
+      <div><h3>{{nightTemp}}</h3> Night</div>
+    </div>
+    </script>
+    <script type="text/template" id="layout">
+    <div id="location" class="container">
+    </div>
+    <div class="container">
+      <div class="row" id="forecast">
+      </div>
+    </div>
+    </script>
+
+    <div id="container"></div>
+
+    <!-- vendor JS -->
+    <script src="/components/jquery/dist/jquery.js"></script>
+    <script src="/components/underscore/underscore.js"></script>
+    <script src="/components/backbone/backbone.js"></script>
+    <script src="/components/marionette/lib/backbone.marionette.js"></script>
+    <script src="/components/hogan/lib/template.js"></script>
+    <script src="/components/hogan/lib/compiler.js"></script>
+
+    <!-- App JS-->
+    <script src="/javascripts/app.js"></script>
+
+</body>
+
+</html>

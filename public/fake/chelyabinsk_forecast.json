@@ -1,0 +1,16 @@
+[
+  {
+    "weekday": "ПН",
+    "date": "15 Дек",
+    "sky": "снег",
+    "dayTemp": -2,
+    "nightTemp": -9
+  },
+  {
+    "weekday": "ВТ",
+    "date": "16 Дек",
+    "sky": "облачно",
+    "dayTemp": -3,
+    "nightTemp": -10
+  }
+]
